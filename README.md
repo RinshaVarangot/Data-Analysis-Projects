@@ -40,7 +40,6 @@ Columns dropped: `Ticket` (low predictive value), `Cabin` (>77% missing).
 Titanic_Survival.ipynb              # Main notebook — cleaning, EDA, feature engineering
 Titanic Dataset.xlsx                # Raw dataset
 cleaned_Titanic_Dataset.xlsx        # Cleaned and feature-engineered dataset
-Screenshot_2026-06-08_144814.png    # Power BI dashboard screenshot
 ```
 
 ---
