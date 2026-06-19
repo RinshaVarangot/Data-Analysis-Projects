@@ -4,30 +4,7 @@ A complete data science project on the Titanic dataset — covering data cleanin
 
 > **891 passengers · 342 survivors (38.38%) · Average fare $32.20 · Average age 29.1 years**
 
----
 
-## Table of Contents
-
-- [Project Overview](#project-overview)
-- [Dataset](#dataset)
-- [Project Structure](#project-structure)
-- [Workflow](#workflow)
-  - [1. Data Cleaning](#1-data-cleaning)
-  - [2. Feature Engineering](#2-feature-engineering)
-  - [3. Exploratory Data Analysis](#3-exploratory-data-analysis)
-- [Key Insights](#key-insights)
-  - [Survival by Class](#survival-by-class)
-  - [Survival by Gender](#survival-by-gender)
-  - [Survival by Age Group](#survival-by-age-group)
-  - [Survival by Embarkation Port](#survival-by-embarkation-port)
-  - [Survival by Family Status](#survival-by-family-status)
-  - [Survival by Title](#survival-by-title)
-  - [Fare & Socioeconomic Status](#fare--socioeconomic-status)
-- [Dashboard](#dashboard)
-- [Requirements](#requirements)
-- [Usage](#usage)
-
----
 
 ## Project Overview
 
