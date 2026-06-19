@@ -86,7 +86,8 @@ Average Income      = AVERAGE(Credit_Risk_Dataset_cleaned[person_income])
 Average DTI Ratio    = AVERAGE(Credit_Risk_Dataset_cleaned[debt_to_income_ratio])
 Average Interest Rate = AVERAGE(Credit_Risk_Dataset_cleaned[loan_int_rate])
 
--- Default Rate: the central risk measure, recalculates per filter context
+###  Default Rate: the central risk measure, recalculates per filter context
+
 Default Rate =
 DIVIDE(
     CALCULATE(
@@ -97,7 +98,8 @@ DIVIDE(
     0
 )
 
--- Loan Status Label: readable mapping from the binary status flag
+### Loan Status Label: readable mapping from the binary status flag
+
 Loan Status Label =
 IF(
     Credit_Risk_Dataset_cleaned[loan_status] = 1,
@@ -105,7 +107,8 @@ IF(
     "Non Default"
 )
 
--- Age Group: binned cohort column
+### Age Group: binned cohort column
+
 Age Group =
 SWITCH(
     TRUE(),
@@ -116,7 +119,8 @@ SWITCH(
     "55+"
 )
 
--- DTI Group: binned debt-to-income ratio
+### DTI Group: binned debt-to-income ratio
+
 DTI Group =
 SWITCH(
     TRUE(),
@@ -127,7 +131,8 @@ SWITCH(
     "Extremely High (40%+)"
 )
 
--- Interest Rate Group: binned interest rate
+### Interest Rate Group: binned interest rate
+
 Interest Rate Group =
 SWITCH(
     TRUE(),
@@ -139,7 +144,7 @@ SWITCH(
 )
 
 
-Note: bin boundaries above are inferred from the chart labels/ordering visible on the dashboard (e.g., DTI Group and Interest Rate Group axis labels). Confirm exact thresholds against your own measure definitions in Power BI, since label text was occasionally truncated in the source screenshots.
+**Note** : bin boundaries above are inferred from the chart labels/ordering visible on the dashboard (e.g., DTI Group and Interest Rate Group axis labels). Confirm exact thresholds against your own measure definitions in Power BI, since label text was occasionally truncated in the source screenshots.
 
 
 
@@ -161,5 +166,4 @@ Home ownership shows the single largest demographic gap in the dataset (Rent: 31
 
 
 
-Built as a portfolio project to demonstrate Power BI data modeling, DAX measures, and multi-page dashboard design for credit risk and loan default analysis.
-ContentPharmacy_Data__ashiiq.xlsxxlsxPharmacy Dashboard.pbixpbixCredit Risk Dataset Dashboard.pbixpbix
+
