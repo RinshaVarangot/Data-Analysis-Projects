@@ -79,7 +79,7 @@ Conditional/comparative analysis design — every page isolates one risk dimensi
 
 ## 🧮 Derived Measures & DAX
 
-dax-- Core volume & portfolio measures
+
 Total Customers     = DISTINCTCOUNT(Credit_Risk_Dataset_cleaned[client_ID])
 Total Loan Amount    = SUM(Credit_Risk_Dataset_cleaned[loan_amnt])
 Average Income      = AVERAGE(Credit_Risk_Dataset_cleaned[person_income])
