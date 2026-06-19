@@ -1,129 +1,176 @@
 
-# Margin & Promotion Analytics
+# CreditScope — Loan Default & Risk Analytics
 
-A 4-page Power BI dashboard analyzing sales, profitability, and promotional performance for a pharmacy distributor operating across 8 European countries.
+A 9-page Power BI dashboard analyzing loan default risk across borrower demographics, employment, education, loan structure, and credit risk indicators. Built on a cleaned credit risk dataset of **32,580 customers** and **€312M** in total loan volume.
 
-Built on a star-schema data model (1 fact table, 3 dimension tables) covering two full fiscal years (2024–2025), ~62,000 transactions, and 5 product categories.
+---
 
+## 📊 Key Insights
 
-## 📊 Dashboard Pages
+**Portfolio overview**
+- Overall default rate across the portfolio: **21.82%** (7.11K of 32.58K customers)
+- Average customer income: **€66.07K**; average DTI ratio: **34.52%**; average interest rate: **11.01%**
+- Non-defaulted loans total **€0.24bn**, more than 3x the **€0.08bn** held in defaulted loans
 
-### 1. Executive Overview
+**Loan grade is the single strongest risk signal**
+- Default rate climbs almost linearly with grade, from **9.96% (Grade A)** to **98.44% (Grade G)**
+- Grades A and B carry roughly 80% of all customers (10.8K + 10.5K of 32.58K) — the portfolio is heavily concentrated in its safest tiers
+- Grade G loans also carry the highest average interest rate (~20%) and the highest average loan amount (€17.2K), compounding risk with exposure
 
-High-level KPIs and trend summary for leadership.
+**Interest rate and DTI are leading indicators, not just outcomes**
+- Default rate by Interest Rate Group rises from **9.40% (Low, below 8%)** to **85.14% (Extremely High)**
+- Default rate by DTI Group rises from **10.99% (0–10%)** to **38.87% (40%+)**
+- Both relationships are close to monotonic, suggesting either could anchor an early-warning score
 
+**Loan intent matters more than expected**
+- **Debt consolidation** loans default at **28.59%** — the highest of any intent category, and notably higher than the portfolio average
+- **Venture** loans default least at **14.81%**, despite carrying a similar average loan amount to other intents
+- This ~14-point spread by intent alone is larger than the spread seen across education levels (only ~1 point, see below)
 
-KPI cards: Total Revenue, Total Margin, Margin %, Total Units Sold
+**Education level has surprisingly little effect**
+- Default rate ranges narrowly from **21.16% (PhD) to 22.17% (Master's)** — essentially flat across all four education levels
+- This is a useful negative finding: education is not a meaningful risk differentiator in this portfolio, unlike loan grade or DTI
 
-Revenue trend line (monthly, with YoY context)
+**Employment type tells a similar story**
+- Default rate ranges from **21.57% (Unemployed) to 22.67% (Self-employed)** — also a narrow band
+- Counter-intuitively, "Full-time" employment doesn't show a materially lower default rate than other employment types in this dataset
 
-Revenue by Category (donut chart)
+**Demographics: home ownership and age**
+- Renters default at **31.57%**, more than 4x the rate of homeowners at **7.47%** — the largest gap of any single demographic cut in the dashboard
+- Older borrowers (55+) default more often (**25.32%**) than younger cohorts (35–44 at **20.55%**), a mild but consistent downward trend with the 18–24 group sitting close behind at 23.22%
 
-Country-level map view
+**Compounding risk**
+- The riskiest identifiable segment combines Grade G/F, Extremely High interest rate, and high DTI — each of these alone pushes default risk above 60–85%, and they tend to co-occur (loan grade visibly drives the interest rate a borrower receives)
 
-Year / Quarter slicers (synced across all pages)
-
-
-### 2. Pharmacy Performance
-
-Regional and store-level breakdown of the distribution network.
-
-
-Map of all pharmacy locations, sized by revenue
-
-Country → Region → City → Pharmacy drill-down matrix (Total Revenue, Total Margin, Margin %, Active Pharmacy Count)
-
-Clustered bar charts: Revenue by Pharmacy Type (Urban/Suburban/Rural) and Store Size Band (S/M/L)
-
-KPI cards: Active Pharmacy Count, Revenue per Pharmacy, Total Revenue
-
-
-### 3. Product Performance
-
-Category and SKU-level profitability analysis.
-
-
-Revenue by Category → Brand (treemap, drill-down)
-
-Top 15 Products by Revenue (table: Units Sold, Margin %, Generic/Branded flag)
-
-Generic vs. Branded revenue split (card pair)
-
-Price vs. Margin scatter plot, bubble-sized by units sold — surfaces pricing outliers
-
-KPI cards: Total Revenue, Active Products Sold, Margin %, Avg Revenue per Transaction
-
-
-### 4. Promotions & Trends
-
-Impact of promotional activity on revenue.
-
-
-Promo vs. Non-Promo revenue by month (clustered column chart)
-
-Revenue YoY % trend line, with a 0% baseline reference
-
-Category-level Promo vs. Non-Promo revenue breakdown (table)
-
-KPI cards: Promo Revenue %, Promo Revenue, Non-Promo Revenue
-
-
-## Hierarchies:
-
-
-Geography: Country → Region → City → Pharmacy Name
-
-Product: Category → Brand → Product Name
-
-Time: Year → Quarter → Month → Date
-
-
-
-## 🧮 Key DAX Measures
-
-daxTotal Revenue = SUM(FactSales[RevenueEUR])
-
-Total Margin = SUM(FactSales[MarginEUR])
-
-Margin % = DIVIDE([Total Margin], [Total Revenue], 0)
-
-Revenue YoY % = DIVIDE([Total Revenue] - [Revenue PY], [Revenue PY], 0)
-
-Promo Revenue % = DIVIDE([Promo Revenue], [Total Revenue], 0)
-
-Generic Revenue % = DIVIDE([Generic Revenue], [Total Revenue], 0)
-
-Active Pharmacy Count = DISTINCTCOUNT(FactSales[PharmacyID])
-
-Revenue per Pharmacy = DIVIDE([Total Revenue], [Active Pharmacy Count], 0)
-
-20+ measures in total, covering revenue/margin, time intelligence (YTD/MTD/YoY/MoM), promotions, generics vs. branded, and network performance. Full list in /docs (optional — add if you export one).
-
+---
 
 ## 🛠️ Tools & Skills Used
 
+- **Power BI Desktop** — full report build: data modeling, DAX measures, multi-page UI design
+- **DAX measures** — default-rate calculations that recompute correctly within any filter/slicer context
+- **Categorical binning (grouped columns)** — Age Group, DTI Group, and Interest Rate Group built from continuous fields to enable cohort-style comparison
+- **Cross-filtering & page navigation** — a custom left-rail navigator and synced KPI header repeated on every page
+- **Multi-visual layout** — donut charts, treemaps, clustered/stacked column charts, scatter plots, and slicer panels combined per page
+- **Conditional/comparative analysis design** — every page isolates one risk dimension (intent, grade, education, employment, DTI, interest rate) while holding the same KPI frame constant, enabling direct page-to-page comparison
 
-Power BI Desktop — data modeling, DAX, report design
+---
 
-Star schema modeling — fact/dimension design, single-direction relationships
+## 🧮 Derived Measures & DAX
 
-Time intelligence DAX — SAMEPERIODLASTYEAR, TOTALYTD, DATEADD
+```dax
+-- Core volume & portfolio measures
+Total Customers     = DISTINCTCOUNT(Credit_Risk_Dataset_cleaned[client_ID])
+Total Loan Amount    = SUM(Credit_Risk_Dataset_cleaned[loan_amnt])
+Average Income      = AVERAGE(Credit_Risk_Dataset_cleaned[person_income])
+Average DTI Ratio    = AVERAGE(Credit_Risk_Dataset_cleaned[debt_to_income_ratio])
+Average Interest Rate = AVERAGE(Credit_Risk_Dataset_cleaned[loan_int_rate])
 
-Drill-down hierarchies — Geography, Product, Time
+-- Default Rate: the central risk measure, recalculates per filter context
+Default Rate =
+DIVIDE(
+    CALCULATE(
+        DISTINCTCOUNT(Credit_Risk_Dataset_cleaned[client_ID]),
+        Credit_Risk_Dataset_cleaned[loan_status] = 1
+    ),
+    DISTINCTCOUNT(Credit_Risk_Dataset_cleaned[client_ID]),
+    0
+)
 
-Custom matrix conditional formatting — data bars, background color scales
+-- Loan Status Label: readable mapping from the binary status flag
+Loan Status Label =
+IF(
+    Credit_Risk_Dataset_cleaned[loan_status] = 1,
+    "Default",
+    "Non Default"
+)
 
+-- Age Group: binned cohort column
+Age Group =
+SWITCH(
+    TRUE(),
+    Credit_Risk_Dataset_cleaned[person_age] < 25, "18-24",
+    Credit_Risk_Dataset_cleaned[person_age] < 35, "25-34",
+    Credit_Risk_Dataset_cleaned[person_age] < 45, "35-44",
+    Credit_Risk_Dataset_cleaned[person_age] < 55, "45-54",
+    "55+"
+)
 
-##📌 Notes
+-- DTI Group: binned debt-to-income ratio
+DTI Group =
+SWITCH(
+    TRUE(),
+    Credit_Risk_Dataset_cleaned[debt_to_income_ratio] < 0.10, "Low (0 - 10%)",
+    Credit_Risk_Dataset_cleaned[debt_to_income_ratio] < 0.20, "Moderate (10% - 20%)",
+    Credit_Risk_Dataset_cleaned[debt_to_income_ratio] < 0.30, "High (20% - 30%)",
+    Credit_Risk_Dataset_cleaned[debt_to_income_ratio] < 0.40, "Very High (30% - 40%)",
+    "Extremely High (40%+)"
+)
 
+-- Interest Rate Group: binned interest rate
+Interest Rate Group =
+SWITCH(
+    TRUE(),
+    Credit_Risk_Dataset_cleaned[loan_int_rate] < 8, "Low (Below 8%)",
+    Credit_Risk_Dataset_cleaned[loan_int_rate] < 12, "Medium (8%-12%)",
+    Credit_Risk_Dataset_cleaned[loan_int_rate] < 16, "High (12%-16%)",
+    Credit_Risk_Dataset_cleaned[loan_int_rate] < 20, "Very High (16%-20%)",
+    "Extremely High (20%+)"
+)
+```
 
-Some pharmacies and products have open/discontinued dates — zero-sales periods before opening or after discontinuation are expected, not data errors.
+> Note: bin boundaries above are inferred from the chart labels/ordering visible on the dashboard (e.g., DTI Group and Interest Rate Group axis labels). Confirm exact thresholds against your own measure definitions in Power BI, since label text was occasionally truncated in the source screenshots.
 
-MarginEUR is pre-calculated in the source data as RevenueEUR − CostEUR.
+---
 
-Geographic coordinates are slightly jittered for map readability.
+## 🗂️ Data Model
 
+Single flat table: **`Credit_Risk_Dataset_cleaned`** — one row per loan applicant, 32,580 rows.
 
+| Field | Type | Description |
+|---|---|---|
+| `client_ID` | ID | Unique applicant identifier |
+| `person_age` | Numeric | Applicant age (binned into `Age Group`) |
+| `gender` | Category | Male / Female |
+| `country` | Category | Canada / UK / USA |
+| `person_income` | Numeric | Annual income |
+| `person_home_ownership` | Category | Rent / Own / Mortgage / Other |
+| `employment_type` | Category | Full-time / Part-time / Self-employed / Unemployed |
+| `education_level` | Category | High School / Bachelor / Master / PhD |
+| `loan_intent` | Category | Debt Consolidation / Education / Medical / Personal / Venture / Home Improvement |
+| `loan_grade` | Category | Lender-assigned risk grade, A (lowest risk) – G (highest risk) |
+| `loan_amnt` | Numeric | Loan amount requested |
+| `loan_int_rate` | Numeric | Interest rate on the loan |
+| `debt_to_income_ratio` | Numeric | Debt-to-income ratio (binned into `DTI Group`) |
+| `loan_status` | Binary | 1 = Default, 0 = Non-default (mapped to `Loan Status Label`) |
 
-Built as a portfolio project to demonstrate Power BI data modeling, DAX, and dashboard design for a multi-country retail/distribution scenario.
+**No relationships/joins required** — this is a single denormalized table, unlike a typical star-schema model. All "dimensions" (loan grade, intent, education, etc.) are columns within the same table rather than separate linked tables.
 
+---
+
+## 📄 Dashboard Pages
+
+| Page | Focus |
+|---|---|
+| Executive Summary | Portfolio-wide KPIs, loan status split, grade distribution, income vs. loan amount |
+| Loan Intent | Default rate and loan characteristics by borrowing purpose |
+| Loan Status | Default vs. non-default compared across income, DTI, grade, interest rate |
+| Education | Education level vs. income, loan amount, default rate, grade |
+| Loan Grade | Default rate, interest rate, DTI, loan amount — all by lender-assigned grade |
+| Employment | Employment type vs. income, loan grade, default rate |
+| DTI Ratio | Debt-to-income, binned into 5 groups, vs. default and loan characteristics |
+| Interest Rate | Interest rate, binned into 5 groups, vs. default and loan characteristics |
+| Risk Analysis | Default rate consolidated across intent, grade, home ownership, age, interest rate, DTI |
+
+---
+
+---
+
+## 📌 Notes
+
+- `Default Rate` recalculates within whatever filter context is active — filtering to Loan Grade = G shows the default rate for that grade specifically, not the portfolio overall.
+- Education level and employment type show minimal spread in default rate (~1 percentage point) — worth flagging in any model-building exercise, since these fields may carry less predictive value than grade, DTI, or interest rate.
+- Home ownership shows the single largest demographic gap in the dataset (Rent: 31.57% vs. Own: 7.47%) — a strong candidate feature for any future risk-scoring model.
+
+---
+
+*Built as a portfolio project to demonstrate Power BI data modeling, DAX measures, and multi-page dashboard design for credit risk and loan default analysis.*
