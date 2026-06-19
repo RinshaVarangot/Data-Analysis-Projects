@@ -6,9 +6,9 @@ A 4-page Power BI dashboard analyzing sales, profitability, and promotional perf
 Built on a star-schema data model (1 fact table, 3 dimension tables) covering two full fiscal years (2024–2025), ~62,000 transactions, and 5 product categories.
 
 
-📊 Dashboard Pages
+## 📊 Dashboard Pages
 
-1. Executive Overview
+### 1. Executive Overview
 
 High-level KPIs and trend summary for leadership.
 
@@ -20,7 +20,7 @@ Country-level map view
 Year / Quarter slicers (synced across all pages)
 
 
-2. Pharmacy Performance
+### 2. Pharmacy Performance
 
 Regional and store-level breakdown of the distribution network.
 
@@ -31,7 +31,7 @@ Clustered bar charts: Revenue by Pharmacy Type (Urban/Suburban/Rural) and Store 
 KPI cards: Active Pharmacy Count, Revenue per Pharmacy, Total Revenue
 
 
-3. Product Performance
+### 3. Product Performance
 
 Category and SKU-level profitability analysis.
 
@@ -43,7 +43,7 @@ Price vs. Margin scatter plot, bubble-sized by units sold — surfaces pricing o
 KPI cards: Total Revenue, Active Products Sold, Margin %, Avg Revenue per Transaction
 
 
-4. Promotions & Trends
+### 4. Promotions & Trends
 
 Impact of promotional activity on revenue.
 
@@ -55,13 +55,13 @@ KPI cards: Promo Revenue %, Promo Revenue, Non-Promo Revenue
 
 
 
-🗂️ Data Model
+## 🗂️ Data Model
 
 Star schema with one fact table and three dimension tables, all single-direction relationships (dimension → fact):
 
 TableDescriptionFactSales~62,000 transaction-level sales records: units, revenue, cost, margin, promo flagDimDateCalendar table (2024–2025), marked as the model's official date tableDimPharmacyPharmacy locations: country, region, city, type, size band, open date, coordinatesDimProductProduct catalog: category, brand, generic/branded flag, list price, discontinued status
 
-Hierarchies:
+## Hierarchies:
 
 
 Geography: Country → Region → City → Pharmacy Name
@@ -70,7 +70,7 @@ Time: Year → Quarter → Month → Date
 
 
 
-🧮 Key DAX Measures
+## 🧮 Key DAX Measures
 
 daxTotal Revenue = SUM(FactSales[RevenueEUR])
 Total Margin = SUM(FactSales[MarginEUR])
@@ -84,7 +84,7 @@ Revenue per Pharmacy = DIVIDE([Total Revenue], [Active Pharmacy Count], 0)
 20+ measures in total, covering revenue/margin, time intelligence (YTD/MTD/YoY/MoM), promotions, generics vs. branded, and network performance. Full list in /docs (optional — add if you export one).
 
 
-🛠️ Tools & Skills Used
+## 🛠️ Tools & Skills Used
 
 
 Power BI Desktop — data modeling, DAX, report design
@@ -94,7 +94,7 @@ Drill-down hierarchies — Geography, Product, Time
 Custom matrix conditional formatting — data bars, background color scales
 
 
-📌 Notes
+##📌 Notes
 
 
 Some pharmacies and products have open/discontinued dates — zero-sales periods before opening or after discontinuation are expected, not data errors.
