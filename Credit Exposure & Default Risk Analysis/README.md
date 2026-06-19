@@ -1,4 +1,4 @@
-# CreditScope — Loan Default & Risk Analytics
+
 # CreditScope — Loan Default & Risk Analytics
 
 A 9-page Power BI dashboard analyzing loan default risk across borrower demographics, employment, education, loan structure, and credit risk indicators. Built on a cleaned credit risk dataset of **32,580 customers** and **€312M** in total loan volume.
