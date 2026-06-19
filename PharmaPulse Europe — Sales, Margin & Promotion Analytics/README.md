@@ -65,7 +65,9 @@ TableDescriptionFactSales~62,000 transaction-level sales records: units, revenue
 
 
 Geography: Country → Region → City → Pharmacy Name
+
 Product: Category → Brand → Product Name
+
 Time: Year → Quarter → Month → Date
 
 
