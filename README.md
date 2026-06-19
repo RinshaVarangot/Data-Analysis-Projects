@@ -9,7 +9,7 @@ A collection of data analysis and dashboard projects spanning Power BI, Python, 
 | [`pharma/`](./pharma) | **PharmaPulse Europe** — Sales, Margin & Promotion Analytics | Pharmacy distribution, 8-country sales performance | Power BI, DAX |
 | [`credit-risk/`](./credit-risk) | **CreditScope** — Loan Default & Risk Analytics | Credit risk, loan default prediction signals | Power BI, DAX |
 | [`ecommerce/`](./ecommerce)  |**E-commerce Data Pipeline** — merge, EDA, feature engineering & refund prediction (32K orders, AUC 0.649) | Online retail / order refund prediction | Python, Pandas, Scikit-learn |
-| [`titanic/`](./titanic) | **Titanic Survival Analysis ** — survival rate by class, sex, age, family status | Classic dataset / exploratory survival analysis | Power BI, DAX ,Python,Pandas,Numpy,Scikit-learn |
+| [`titanic/`](./titanic) | **Titanic Survival Analysis** — survival rate by class, sex, age, family status | Classic dataset / exploratory survival analysis | Power BI, DAX ,Python,Pandas,Numpy,Scikit-learn |
 
 Each folder contains its own detailed README with insights, data model/dataset notes, and (where applicable) DAX measures or code.
 
@@ -23,10 +23,5 @@ Each folder contains its own detailed README with insights, data model/dataset n
 - Feature engineering and machine learning (classification, class-imbalance handling)
 - Insight generation and data storytelling
 
-## 🚀 Getting Started
 
-Each project is self-contained — open its folder for the relevant `.pbix`, notebook, or dataset, plus a README with full context.
 
----
-
-*This is a personal portfolio repository. Feedback and suggestions welcome.*
